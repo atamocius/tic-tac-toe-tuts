@@ -1,3 +1,5 @@
+import classes from "./game.module.css";
+
 import React from "react";
 
 import Board from "./board";
@@ -20,9 +22,11 @@ export default function Game() {
   };
 
   return (
-    <div>
-      <Board squares={data.squares} onClick={handleClick} />
-      <div>{status}</div>
+    <div className={classes.root}>
+      <div>
+        <Board squares={data.squares} onClick={handleClick} />
+        <div className={classes.status}>{status}</div>
+      </div>
     </div>
   );
 }

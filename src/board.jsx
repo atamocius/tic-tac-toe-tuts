@@ -1,3 +1,5 @@
+import classes from "./board.module.css";
+
 import React from "react";
 
 import Square from "./square";
@@ -9,17 +11,17 @@ export default function Board(props) {
 
   return (
     <div>
-      <div>
+      <div className={classes.row}>
         {renderSquare(0)}
         {renderSquare(1)}
         {renderSquare(2)}
       </div>
-      <div>
+      <div className={classes.row}>
         {renderSquare(3)}
         {renderSquare(4)}
         {renderSquare(5)}
       </div>
-      <div>
+      <div className={classes.row}>
         {renderSquare(6)}
         {renderSquare(7)}
         {renderSquare(8)}
