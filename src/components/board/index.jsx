@@ -1,8 +1,8 @@
-import classes from "./board.module.css";
+import classes from "./index.module.css";
 
 import React from "react";
 
-import Square from "./square";
+import Square from "../square";
 
 export default function Board(props) {
   const renderSquare = (i) => {
