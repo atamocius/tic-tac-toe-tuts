@@ -1,15 +1,19 @@
 import classes from "./game.module.css";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Board from "./board";
 
 export default function Game() {
-  const [squares, setSquares] = useState(Array(9).fill(null));
-  const [next, setNext] = useState("🍄");
-  const [winner, setWinner] = useState(null);
+  const [state, setState] = useState({
+    squares: Array(9).fill(null),
+    next: "🍄",
+    winner: null,
+  });
 
   const handleClick = (i) => {
+    const { squares, next, winner } = state;
+
     if (winner !== null || squares[i] !== null) {
       return;
     }
@@ -17,20 +21,22 @@ export default function Game() {
     const squaresCopy = squares.slice();
     squaresCopy[i] = next;
 
-    setSquares(squaresCopy);
-    setNext(next === "🍄" ? "🍌" : "🍄");
+    setState({
+      squares: squaresCopy,
+      next: next === "🍄" ? "🍌" : "🍄",
+      winner: calcWinner(squaresCopy),
+    });
   };
 
-  useEffect(() => {
-    setWinner(calcWinner(squares));
-  }, [squares]);
-
-  const status = winner === null ? `Next player: ${next}` : `Winner: ${winner}`;
+  const status =
+    state.winner === null
+      ? `Next player: ${state.next}`
+      : `Winner: ${state.winner}`;
 
   return (
     <div className={classes.root}>
       <div>
-        <Board squares={squares} onClick={handleClick} />
+        <Board squares={state.squares} onClick={handleClick} />
         <div className={classes.status}>{status}</div>
       </div>
     </div>
